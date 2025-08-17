@@ -1,13 +1,15 @@
 import requests
 import csv
+import re 
 
-# --- Bloco de Configuração  ---
+# --- Bloco de Configuração ---
 token = ""
 api_url = "https://api.github.com"
 headers = {"Authorization": f"token {token}"}
 
 
-# --- Funções de Coleta de Dados da API ---
+# --- Funções de Coleta de Dados da API  ---
+
 def get_popular_repos(num_repos):
     url = f"{api_url}/search/repositories?q=stars:>80000&sort=stars&order=desc&per_page={num_repos}"
     response = requests.get(url, headers=headers)
@@ -16,38 +18,38 @@ def get_popular_repos(num_repos):
     else:
         raise Exception(f"Failed to fetch repositories: {response.status_code}")
 
-def get_repo_pull_requests(owner, repo):
-    url = f"{api_url}/repos/{owner}/{repo}/pulls"
+def get_repo_pull_requests_count(owner, repo):
+    url = f"{api_url}/search/issues?q=is:pr+repo:{owner}/{repo}"
     response = requests.get(url, headers=headers)
     if response.status_code == 200:
-        return response.json()
+        return response.json()["total_count"]
     else:
-        raise Exception(f"Failed to fetch repository pull requests: {response.status_code}")
+        return 0
 
-def get_repo_releases(owner, repo):
-    url = f"{api_url}/repos/{owner}/{repo}/releases"
+def get_repo_releases_count(owner, repo):
+    url = f"{api_url}/repos/{owner}/{repo}/releases?per_page=1"
     response = requests.get(url, headers=headers)
     if response.status_code == 200:
-        return response.json()
-    else:
-        raise Exception(f"Failed to fetch repository releases: {response.status_code}")
-
-def get_repo_closed_issues(owner, repo):
-    url = f"{api_url}/repos/{owner}/{repo}/issues?state=closed"
+        if 'Link' in response.headers:
+            link_header = response.headers['Link']
+            last_page_match = re.search(r'page=(\d+)>; rel="last"', link_header)
+            if last_page_match:
+                return int(last_page_match.group(1))
+        return len(response.json())
+    return 0
+    
+def get_repo_closed_issues_count(owner, repo):
+    url = f"{api_url}/search/issues?q=is:issue+state:closed+repo:{owner}/{repo}"
     response = requests.get(url, headers=headers)
     if response.status_code == 200:
-        return response.json()
+        return response.json()["total_count"]
     else:
-        raise Exception(f"Failed to fetch repository closed issues: {response.status_code}")
+        return 0
 
 
-# --- Novas Funções de Processamento ---
+# --- Funções de Processamento ---
 
 def gather_repo_data(repos):
-    """
-    Função central que itera sobre os repositórios e coleta todos os dados detalhados.
-    Isso evita repetir chamadas de API.
-    """
     all_repo_data = []
     total = len(repos)
     for i, repo in enumerate(repos):
@@ -55,52 +57,38 @@ def gather_repo_data(repos):
         owner = repo["owner"]["login"]
         repo_name = repo["name"]
         
-
-        pull_requests = get_repo_pull_requests(owner, repo_name)
-        releases = get_repo_releases(owner, repo_name)
-        closed_issues = get_repo_closed_issues(owner, repo_name)
+        pull_requests_count = get_repo_pull_requests_count(owner, repo_name)
+        closed_issues_count = get_repo_closed_issues_count(owner, repo_name)
+        releases_count = get_repo_releases_count(owner, repo_name)
         
         all_repo_data.append({
             "name": repo['name'],
             "stars": repo['stargazers_count'],
             "created_at": repo['created_at'],
             "open_issues_count": repo['open_issues_count'],
-            "pull_requests_count": len(pull_requests),
-            "releases_count": len(releases),
+            "pull_requests_count": pull_requests_count,
+            "releases_count": releases_count,
             "language": repo['language'],
-            "closed_issues_count": len(closed_issues)
+            "closed_issues_count": closed_issues_count
         })
     return all_repo_data
 
 def generate_csv_file(repo_data, filename="repositorios_github.csv"):
-    """
-    Recebe os dados coletados e os salva em um arquivo CSV.
-    """
     print(f"\nGerando arquivo '{filename}'...")
-    # Define o cabeçalho do CSV
     headers = ["Repository", "Stars", "Created At", "Open Issues", "Total Pull Requests", "Total Releases", "Language", "Closed Issues"]
     
     with open(filename, mode='w', newline='', encoding='utf-8') as file:
         writer = csv.writer(file)
-        writer.writerow(headers) # Escreve o cabeçalho
+        writer.writerow(headers)
         
         for repo in repo_data:
             writer.writerow([
-                repo["name"],
-                repo["stars"],
-                repo["created_at"],
-                repo["open_issues_count"],
-                repo["pull_requests_count"],
-                repo["releases_count"],
-                repo["language"],
-                repo["closed_issues_count"]
+                repo["name"], repo["stars"], repo["created_at"],
+                repo["open_issues_count"], repo["pull_requests_count"],
+                repo["releases_count"], repo["language"], repo["closed_issues_count"]
             ])
 
-# --- Função de Exibição ---
 def print_repo_infos(repo_data):
-    """
-    Recebe os dados já processados e apenas os imprime na tela.
-    """
     print("\n--- Lista de Repositórios Populares ---")
     for repo in repo_data:
         print(f"Repository: {repo['name']}")
@@ -116,7 +104,7 @@ def print_repo_infos(repo_data):
 
 # --- Bloco Principal de Execução com Menu ---
 if __name__ == "__main__":
-    num_repos = 100
+    num_repos = 5
     
     while True:
         print("\nO que você deseja fazer?")
@@ -127,14 +115,11 @@ if __name__ == "__main__":
 
         if choice in ['1', '2']:
             try:
-            
                 print("Buscando a lista de repositórios populares... Aguarde.")
                 popular_repos = get_popular_repos(num_repos=num_repos)
                 
-             
                 full_data = gather_repo_data(popular_repos)
                 
-            
                 if choice == '1':
                     print_repo_infos(full_data)
                 elif choice == '2':
