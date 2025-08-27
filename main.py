@@ -1,6 +1,7 @@
 import requests
 import csv
 import re
+import time
 
 from models.repository import Repository 
 
@@ -13,12 +14,29 @@ headers = {"Authorization": f"token {token}"}
 # --- Funções de Coleta de Dados da API  ---
 
 def get_popular_repos(num_repos):
-    url = f"{api_url}/search/repositories?q=stars:>80000&sort=stars&order=desc&per_page={num_repos}"
-    response = requests.get(url, headers=headers)
-    if response.status_code == 200:
-        return response.json()["items"]
-    else:
-        raise Exception(f"Failed to fetch repositories: {response.status_code}")
+    all_repos = []
+    per_page = 100 
+    pages_to_fetch = (num_repos + per_page - 1) // per_page # Cálculo para arredondar para cima
+
+    print(f"Buscando {num_repos} repositórios em {pages_to_fetch} páginas...")
+
+    for page in range(1, pages_to_fetch + 1):
+
+        url = f"{api_url}/search/repositories?q=stars:>=1&sort=stars&order=desc&per_page={per_page}&page={page}"
+        
+        response = requests.get(url, headers=headers)
+        
+        if response.status_code == 200:
+            data = response.json().get("items", [])
+            all_repos.extend(data)
+            print(f"Página {page} de {pages_to_fetch} buscada com sucesso. Total de repositórios até agora: {len(all_repos)}")
+            
+            if len(data) < per_page:
+                break 
+        else:
+            raise Exception(f"Falha ao buscar repositórios na página {page}: {response.status_code} - {response.text}")
+            
+    return all_repos[:num_repos]
 
 def get_repo_pull_requests(owner, repo):
     url = f"{api_url}/search/issues?q=is:pr+repo:{owner}/{repo}"
@@ -55,25 +73,35 @@ def gather_repo_data(repos):
     all_repo_data = []
     total = len(repos)
     for i, repo in enumerate(repos):
+
+        time.sleep(0.5) 
+        
         print(f"Processando repositório {i + 1}/{total}: {repo['name']}...")
         owner = repo["owner"]["login"]
         repo_name = repo["name"]
         
-        pull_requests_count = len(get_repo_pull_requests(owner, repo_name))
-        closed_issues_count = get_repo_closed_issues_count(owner, repo_name)
+
+        pull_requests_data = get_repo_pull_requests(owner, repo_name)
+        pull_requests_count = len(pull_requests_data) if isinstance(pull_requests_data, dict) else 0
+
         releases_count = get_repo_releases_count(owner, repo_name)
-        
+
+        closed_issues_count = get_repo_closed_issues_count(owner, repo_name)
+
+        open_issues_count = repo['open_issues_count']
+
         repository = Repository(
             name=repo['name'],
             stars=repo['stargazers_count'],
             created_at=repo['created_at'],
-            open_issues_count=repo['open_issues_count'],
+            open_issues_count=open_issues_count, 
             pull_requests_count=pull_requests_count,
             releases_count=releases_count,
             language=repo['language'],
             closed_issues_count=closed_issues_count
         )
         all_repo_data.append(repository)
+        
     return all_repo_data
 
 def generate_csv_file(repo_data: list[Repository], filename="repositorios_github.csv"):
@@ -124,7 +152,7 @@ def generate_rqs_data(repos):
 
 # --- Bloco Principal de Execução com Menu ---
 if __name__ == "__main__":
-    num_repos = 1
+    num_repos = 1000
     
     while True:
         print("\nO que você deseja fazer?")
