@@ -117,3 +117,11 @@ A análise da proporção de *issues* fechadas em relação ao total de *issues*
 | **Mediana da Razão de Issues Fechadas** | 95,7% |
 
 ---
+
+## ✅ Conclusão da discussão
+
+Hipóteses confirmadas: RQ01, RQ02, RQ05, RQ06
+
+Hipóteses parcialmente confirmadas: RQ03 e RQ04, onde a frequência de releases e atualizações varia muito entre projetos e pode depender de fatores além da popularidade (ex.: estabilidade, maturidade do código).
+
+Insight geral: Repositórios populares tendem a ser maduros, bem gerenciados, escritos em linguagens consolidadas e recebem participação ativa da comunidade. Entretanto, nem sempre lançam versões com alta frequência, mostrando que qualidade e consistência podem ser mais importantes que quantidade de releases.
