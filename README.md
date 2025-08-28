@@ -2,7 +2,7 @@
 ## 📌 Introdução
 Neste trabalho, exploramos os **1.000 repositórios mais populares do GitHub** para identificar **padrões e características que definem o sucesso** no cenário atual de desenvolvimento de software.
 
-Formulamos as seguintes **Questões de Pesquisa (RQs)** acompanhadas de métricas e hipóteses:
+Respondemos as seguintes **Questões de Pesquisa (RQs)** acompanhadas de métricas e hipóteses:
 
 ---
 
