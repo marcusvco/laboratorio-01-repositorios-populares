@@ -60,6 +60,8 @@ O arquivo **`repositorios_github.csv`** contém informações sobre os **1.000 r
 
 A análise dos dados resultou nos seguintes valores para cada questão de pesquisa:
 
+![RQ06](./img/RQ06.png)
+
 ---
 
 ## 🔹 RQ01: Sistemas populares são maduros/antigos?
