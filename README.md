@@ -67,7 +67,7 @@ A análise da idade dos repositórios revelou que a maioria dos projetos popular
 
 | Métrica       | Valor   |
 |---------------|---------|
-| **Idade Média** | 8,08 anos |
+| **Mediana da Idade** | 8,35 anos |
 
 ---
 
@@ -76,7 +76,7 @@ O número de contribuições externas, medido pelo total de *pull requests*, apr
 
 | Métrica                  | Valor |
 |---------------------------|-------|
-| **Mediana de Pull Requests** | 456   |
+| **Média de Pull Requests** | 2060   |
 
 ---
 
@@ -85,7 +85,7 @@ A quantidade de *releases* varia bastante entre os projetos, mas a mediana suger
 
 | Métrica              | Valor |
 |----------------------|-------|
-| **Mediana de Releases** | 83    |
+| **Mediana de Releases** | 36    |
 
 ---
 
