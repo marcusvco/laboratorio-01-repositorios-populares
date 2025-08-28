@@ -107,7 +107,7 @@ A contagem das linguagens primárias confirmou a dominância de tecnologias cons
 | **Não especificado** | 103 |
 
 ---
-![Alt text](https://assets.digitalocean.com/articles/alligator/boo.svg "a title")
+![RQ05](./img/RQ05.png)
 
 ## 🔹 RQ06: Sistemas populares possuem um alto percentual de *issues* fechadas?
 A análise da proporção de *issues* fechadas em relação ao total de *issues* indica que a maioria dos repositórios populares gerencia ativamente os problemas reportados.
