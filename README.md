@@ -67,7 +67,7 @@ A análise da idade dos repositórios revelou que a maioria dos projetos popular
 
 | Métrica       | Valor   |
 |---------------|---------|
-| **Idade Mediana** | 9,1 anos |
+| **Idade Mediana** | 8,08 anos |
 
 ---
 
