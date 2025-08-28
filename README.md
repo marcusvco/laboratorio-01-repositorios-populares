@@ -50,10 +50,7 @@ O arquivo **`repositorios_github.csv`** contém informações sobre os **1.000 r
    - Repositórios sem linguagem definida → **"Não especificado"**.
 
 6. **Percentual de Issues Fechadas (RQ06):**  
-   - Fórmula:  
-     \[
-     \text{Percentual Fechadas} = \frac{\text{Closed Issues}}{\text{Open Issues + Closed Issues}}
-     \]  
+   - Fórmula: razão entre número de issues fechadas pelo total de issues  
    - Casos com zero *issues* foram desconsiderados.  
    - Análise feita sobre a **mediana** dos valores.
 
