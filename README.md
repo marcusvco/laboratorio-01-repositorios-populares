@@ -94,19 +94,20 @@ A contagem das linguagens primárias confirmou a dominância de tecnologias cons
 
 | Linguagem          | Repositórios |
 |--------------------|--------------|
-| **Python**         | 151 |
-| **TypeScript**     | 106 |
-| **JavaScript**     | 95  |
-| **Go**             | 43  |
-| **Rust**           | 30  |
-| **C++**            | 28  |
-| **Java**           | 26  |
-| **Shell**          | 14  |
-| **C**              | 12  |
-| **Jupyter Notebook** | 12  |
-| **Não especificado** | 34 |
+| **Python**         | 189 |
+| **TypeScript**     | 156 |
+| **JavaScript**     | 130  |
+| **Go**             | 73  |
+| **Java**           | 50  |
+| **C++**            | 48  |
+| **Rust**           | 44  |
+| **C**          | 25  |
+| **Jupyter Notebook**              | 22  |
+| **HTML** | 19  |
+| **Não especificado** | 103 |
 
 ---
+![Alt text](https://assets.digitalocean.com/articles/alligator/boo.svg "a title")
 
 ## 🔹 RQ06: Sistemas populares possuem um alto percentual de *issues* fechadas?
 A análise da proporção de *issues* fechadas em relação ao total de *issues* indica que a maioria dos repositórios populares gerencia ativamente os problemas reportados.
