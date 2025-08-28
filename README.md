@@ -29,3 +29,15 @@ Neste trabalho, buscamos no universo dos repositórios de código aberto mais po
 - **RQ06:** Sistemas populares possuem um alto percentual de issues fechadas?  
   **Métrica:** razão entre número de issues fechadas pelo total de issues  
   **Hipótese:** Projetos populares são bem gerenciados, o que se reflete em uma alta porcentagem de issues fechadas.  
+
+
+## Metodologia
+ O arquivo repositorios_github.csv contém informações sobre os 1.000 repositórios com mais estrelas, incluindo data de criação, número de pull requests, total de releases, linguagem primária e contagem de issues abertas e fechadas.
+
+Cálculo da Idade (RQ01): A idade de cada repositório foi calculada subtraindo a data de criação (Created At)  da data de referência deste relatório (agosto de 2025). O resultado foi convertido para anos.  
+Contribuição Externa (RQ02): A métrica de contribuição foi analisada diretamente a partir da coluna Total Pull Requests.  
+Frequência de Releases (RQ03): A frequência de lançamentos foi avaliada usando os dados da coluna Total Releases.  
+Popularidade das Linguagens (RQ05): A linguagem primária de cada repositório foi extraída da coluna Language. Foi realizada uma contagem para identificar as linguagens mais frequentes na amostra. Repositórios sem uma linguagem principal definida foram categorizados como "Não especificado".  
+Percentual de Issues Fechadas (RQ06): Para cada repositório, o total de issues foi calculado somando as Open Issues e Closed Issues. A razão de 
+issues fechadas foi então calculada pela fórmula da razão entre número de issues fechadas pelo total de issues
+Casos sem nenhuma issue (denominador zero) foram desconsiderados do cálculo da mediana.
