@@ -55,3 +55,64 @@ O arquivo **`repositorios_github.csv`** contém informações sobre os **1.000 r
    - Análise feita sobre a **mediana** dos valores.
 
 ---
+
+# 📊 Resultados
+
+A análise dos dados resultou nos seguintes valores para cada questão de pesquisa:
+
+---
+
+## 🔹 RQ01: Sistemas populares são maduros/antigos?
+A análise da idade dos repositórios revelou que a maioria dos projetos populares possui um tempo considerável de existência.
+
+| Métrica       | Valor   |
+|---------------|---------|
+| **Idade Mediana** | 9,1 anos |
+
+---
+
+## 🔹 RQ02: Sistemas populares recebem muita contribuição externa?
+O número de contribuições externas, medido pelo total de *pull requests*, apresentou uma grande variação, mas a mediana indica um volume significativo de colaboração.
+
+| Métrica                  | Valor |
+|---------------------------|-------|
+| **Mediana de Pull Requests** | 456   |
+
+---
+
+## 🔹 RQ03: Sistemas populares lançam *releases* com frequência?
+A quantidade de *releases* varia bastante entre os projetos, mas a mediana sugere que a prática de versionar e lançar novas versões é comum.
+
+| Métrica              | Valor |
+|----------------------|-------|
+| **Mediana de Releases** | 83    |
+
+---
+
+## 🔹 RQ05: Sistemas populares são escritos nas linguagens mais populares?
+A contagem das linguagens primárias confirmou a dominância de tecnologias consolidadas no desenvolvimento de software.
+
+| Linguagem          | Repositórios |
+|--------------------|--------------|
+| **Python**         | 151 |
+| **TypeScript**     | 106 |
+| **JavaScript**     | 95  |
+| **Go**             | 43  |
+| **Rust**           | 30  |
+| **C++**            | 28  |
+| **Java**           | 26  |
+| **Shell**          | 14  |
+| **C**              | 12  |
+| **Jupyter Notebook** | 12  |
+| **Não especificado** | 34 |
+
+---
+
+## 🔹 RQ06: Sistemas populares possuem um alto percentual de *issues* fechadas?
+A análise da proporção de *issues* fechadas em relação ao total de *issues* indica que a maioria dos repositórios populares gerencia ativamente os problemas reportados.
+
+| Métrica                          | Valor   |
+|----------------------------------|---------|
+| **Mediana da Razão de Issues Fechadas** | 95,7% |
+
+---
