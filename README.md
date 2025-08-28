@@ -1,43 +1,60 @@
-# laboratorio-01-repositorios-populares
-Alunos: Luiz Felipe Campos de Morais e Marcus Vinícius Carvalho de Oliveira
 
-## Introdução e hipóteses informais sobre as RQs
-Neste trabalho, buscamos no universo dos repositórios de código aberto mais populares do GitHub para desvendar os padrões e as características que definem o sucesso no cenário atual de desenvolvimento de software.
+## 📌 Introdução
+Neste trabalho, exploramos os **1.000 repositórios mais populares do GitHub** para identificar **padrões e características que definem o sucesso** no cenário atual de desenvolvimento de software.
 
+Formulamos as seguintes **Questões de Pesquisa (RQs)** acompanhadas de métricas e hipóteses:
 
-- **RQ01:** Sistemas populares são maduros/antigos?  
-  **Métrica:** idade do repositório (calculado a partir da data de sua criação)  
-  **Hipótese:** Repositórios populares tendem a ser mais antigos, pois a confiança e a base de usuários levam tempo para se consolidar.  
+---
 
-- **RQ02:** Sistemas populares recebem muita contribuição externa?  
-  ***Métrica:** total de pull requests aceitas  
-  **Hipótese:** A popularidade atrai uma comunidade engajada, resultando em um alto volume de contribuições externas (pull requests).  
+## ❓ Questões de Pesquisa
 
-- **RQ03:** Sistemas populares lançam releases com frequência?  
-  **Métrica:** total de releases  
-  **Hipótese:** Projetos populares lançam novas versões com frequência para demonstrar desenvolvimento ativo e entregar valor aos usuários.  
+| RQ | Pergunta | Métrica | Hipótese |
+|----|----------|---------|----------|
+| **RQ01** | Sistemas populares são maduros/antigos? | Idade do repositório (anos desde a criação) | Repositórios populares tendem a ser mais antigos, pois confiança e base de usuários levam tempo para se consolidar. |
+| **RQ02** | Sistemas populares recebem muita contribuição externa? | Total de *pull requests* aceitas | A popularidade atrai uma comunidade engajada, resultando em alto volume de contribuições externas. |
+| **RQ03** | Sistemas populares lançam *releases* com frequência? | Total de *releases* | Projetos populares lançam versões frequentes para demonstrar desenvolvimento ativo e entregar valor aos usuários. |
+| **RQ04** | Sistemas populares são atualizados com frequência? | Tempo até a última atualização | Repositórios populares se mantêm relevantes e seguros com atualizações constantes. |
+| **RQ05** | Sistemas populares são escritos nas linguagens mais populares? | Linguagem primária do repositório | Repositórios populares são majoritariamente desenvolvidos nas linguagens de maior uso no mercado. |
+| **RQ06** | Sistemas populares possuem um alto percentual de *issues* fechadas? | Razão entre issues fechadas / total de issues | Projetos populares são bem gerenciados, refletindo em alta porcentagem de *issues* fechadas. |
 
-- **RQ04:** Sistemas populares são atualizados com frequência?  
-  **Métrica:** tempo até a última atualização (calculado a partir da data de última
-  atualização)  
-  **Hipótese:** Para se manterem relevantes e seguros, os repositórios populares devem ser atualizados constantemente.  
-  
-- **RQ05:** Sistemas populares são escritos nas linguagens mais populares?  
-  **Métrica:** linguagem primária de cada um desses repositórios  
-  **Hipótese:** Os repositórios mais populares são majoritariamente desenvolvidos nas linguagens de programação mais usadas no mercado.  
+---
 
-- **RQ06:** Sistemas populares possuem um alto percentual de issues fechadas?  
-  **Métrica:** razão entre número de issues fechadas pelo total de issues  
-  **Hipótese:** Projetos populares são bem gerenciados, o que se reflete em uma alta porcentagem de issues fechadas.  
+## ⚙️ Metodologia
 
+O arquivo **`repositorios_github.csv`** contém informações sobre os **1.000 repositórios com mais estrelas** no GitHub, incluindo:
 
-## Metodologia
- O arquivo repositorios_github.csv contém informações sobre os 1.000 repositórios com mais estrelas, incluindo data de criação, número de pull requests, total de releases, linguagem primária e contagem de issues abertas e fechadas.
+- 📅 Data de criação  
+- 🔀 Número de *pull requests*  
+- 🚀 Total de *releases*  
+- 💻 Linguagem primária  
+- 🐞 Contagem de *issues* abertas e fechadas  
 
-Cálculo da Idade (RQ01): A idade de cada repositório foi calculada subtraindo a data de criação (Created At)  da data de referência deste relatório (agosto de 2025). O resultado foi convertido para anos.  
-Contribuição Externa (RQ02): A métrica de contribuição foi analisada diretamente a partir da coluna Total Pull Requests.  
-Frequência de Releases (RQ03): A frequência de lançamentos foi avaliada usando os dados da coluna Total Releases.  
-Popularidade das Linguagens (RQ05): A linguagem primária de cada repositório foi extraída da coluna Language. Foi realizada uma contagem para identificar as linguagens mais frequentes na amostra. Repositórios sem uma linguagem principal definida foram categorizados como "Não especificado".  
-Percentual de Issues Fechadas (RQ06): Para cada repositório, o total de issues foi calculado somando as Open Issues e Closed Issues. A razão de 
-issues fechadas foi então calculada pela fórmula da razão entre número de issues fechadas pelo total de issues
-Casos sem nenhuma issue (denominador zero) foram desconsiderados do cálculo da mediana.
+**Etapas de análise:**
+
+1. **Cálculo da Idade (RQ01):**  
+   - Idade = Data de referência (ago/2025) – Data de criação.  
+   - Resultado convertido em anos.
+
+2. **Contribuição Externa (RQ02):**  
+   - Métrica: coluna **Total Pull Requests**.
+
+3. **Frequência de Releases (RQ03):**  
+   - Métrica: coluna **Total Releases**.
+
+4. **Atualizações Recentes (RQ04):**  
+   - Métrica: diferença entre a data de última atualização e a data de referência.
+
+5. **Popularidade das Linguagens (RQ05):**  
+   - Extração da coluna **Language**.  
+   - Contagem das linguagens mais frequentes.  
+   - Repositórios sem linguagem definida → **"Não especificado"**.
+
+6. **Percentual de Issues Fechadas (RQ06):**  
+   - Fórmula:  
+     \[
+     \text{Percentual Fechadas} = \frac{\text{Closed Issues}}{\text{Open Issues + Closed Issues}}
+     \]  
+   - Casos com zero *issues* foram desconsiderados.  
+   - Análise feita sobre a **mediana** dos valores.
+
+---
