@@ -116,7 +116,7 @@ A análise da proporção de *issues* fechadas em relação ao total de *issues*
 
 | Métrica                          | Valor   |
 |----------------------------------|---------|
-| **Mediana da Razão de Issues Fechadas** | 95,7% |
+| **Mediana da Razão de Issues Fechadas** | 72,04% |
 
 ---
 
