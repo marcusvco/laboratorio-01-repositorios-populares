@@ -42,7 +42,7 @@ def get_repo_pull_requests(owner, repo):
     url = f"{api_url}/search/issues?q=is:pr+repo:{owner}/{repo}"
     response = requests.get(url, headers=headers)
     if response.status_code == 200:
-        return response.json()
+        return response.json()["total_count"]
     else:
         return 0
 
@@ -81,8 +81,7 @@ def gather_repo_data(repos):
         repo_name = repo["name"]
         
 
-        pull_requests_data = get_repo_pull_requests(owner, repo_name)
-        pull_requests_count = len(pull_requests_data) if isinstance(pull_requests_data, dict) else 0
+        pull_requests_count = get_repo_pull_requests(owner, repo_name)
 
         releases_count = get_repo_releases_count(owner, repo_name)
 
